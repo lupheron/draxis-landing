@@ -1,6 +1,6 @@
 // DRAXIS landing — live mock data, tabs, demo loop, scroll reveal, demo form.
 (() => {
-  const CONTACT_EMAIL = ""; // <-- put your email here, e.g. "hello@draxis.io"
+  const CONTACT_EMAIL = "nuriddinovsuxrob27@gmail.com";
 
   const $ = (s) => document.querySelector(s);
   const fmt = (n) => Math.round(n).toLocaleString('en-US');
@@ -102,9 +102,7 @@
   hrIO.observe(document.querySelector('[data-co="0"]').closest('.card'));
 
   // ---- contact
-  const mailLink = $('#mailLink'), note = $('#formNote');
-  if (CONTACT_EMAIL) { mailLink.textContent = CONTACT_EMAIL; mailLink.href = 'mailto:' + CONTACT_EMAIL; }
-  else { $('#mailLine').hidden = true; }
+  const note = $('#formNote');
   $('#demoForm').addEventListener('submit', (ev) => {
     ev.preventDefault();
     const v = (id) => document.getElementById(id).value.trim();
