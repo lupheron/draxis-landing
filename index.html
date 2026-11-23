@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DRAXIS — Command center for logistics recruiting &amp; HR</title>
+<meta name="description" content="DRAXIS puts attendance, calls, leads, hires and recruiter performance in one place, across every company you run.">
+<meta property="og:title" content="DRAXIS — Command center for logistics recruiting & HR">
+<meta property="og:description" content="Know who's working, who's calling and who's hiring. Right now.">
+<meta property="og:image" content="/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A1120">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#0A1120;color:#E9EEF8;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#FFB224}a:hover{color:#FFD27A}
+*{box-sizing:border-box}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.disp{font-family:Archivo,Inter,sans-serif;font-stretch:112%;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.2em;color:#FFB224;font-weight:500;display:flex;align-items:center;gap:12px;text-transform:uppercase}
+.kick::before{content:"";width:28px;height:2px;background:#FFB224}
+.lead{font-size:20px;line-height:1.55;color:#A5B1C9;max-width:560px;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:12px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid #2A3A5A;color:#E9EEF8;background:#131E34;font-family:inherit;cursor:pointer}
+.btn:hover{color:#E9EEF8;border-color:#41547A}
+.btn.pri{background:#FFB224;border-color:#FFB224;color:#1B1300}
+.btn.pri:hover{background:#FFC34F;color:#1B1300}
+.card{background:#111A2E;border:1px solid #22314D;border-radius:16px}
+.label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8D9AB5}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pg{color:#3DD68C;background:rgba(61,214,140,.12)}.pa{color:#FFB224;background:rgba(255,178,36,.13)}.pr{color:#FF7A75;background:rgba(242,97,92,.14)}.pb{color:#8FB2FF;background:rgba(110,155,255,.15)}
+.av{width:28px;height:28px;border-radius:50%;display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:#0A1120;flex:none}
+.row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid #1D2A44;font-size:14px}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:64px;align-items:center}
+.split.flip > :first-child{order:2}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kpi{background:#131E34;border:1px solid #22314D;border-radius:12px;padding:12px 14px;min-width:0}
+.kpi b{display:block;white-space:nowrap;font-family:Archivo,Inter,sans-serif;font-stretch:108%;font-weight:700;font-size:28px;margin-top:6px;font-variant-numeric:tabular-nums}
+.section{padding-top:120px;padding-bottom:120px}
+.h2{font-size:52px;line-height:1.04;margin:18px 0 20px}
+.bullets{display:flex;flex-direction:column;gap:12px;margin-top:26px;padding:0;list-style:none}
+.bullets li{display:flex;gap:12px;align-items:baseline;font-size:17px;color:#D5DCEA}
+.bullets li::before{content:"";width:8px;height:8px;background:#FFB224;transform:rotate(45deg) translateY(-2px);flex:none;border-radius:1px}
+.meter{height:10px;border-radius:5px;background:#0C1426;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:5px;transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.tool{background:#EEF1F6;color:#2E3646;border-radius:10px;padding:12px 16px;font-size:14px;font-weight:600;white-space:nowrap;box-shadow:0 14px 30px rgba(0,0,0,.35);display:flex;gap:12px;align-items:center}
+.tool span{font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:12px;color:#5E6779}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-size:14px;color:#C3CCDD;font-weight:500}
+.field input,.field select{min-height:48px;border-radius:10px;border:1px solid #2A3A5A;background:#0C1426;color:#E9EEF8;padding:0 14px;font-size:16px;font-family:inherit}
+.field input:focus,.field select:focus,.btn:focus-visible,.tab:focus-visible{outline:2px solid #FFB224;outline-offset:2px}
+.tab{background:none;border:0;border-bottom:3px solid transparent;color:#A5B1C9;font:600 15px Inter,sans-serif;padding:10px 16px;cursor:pointer;min-height:44px}
+.navlinks{display:flex;gap:28px;font-size:15px}
+.navlinks a{color:#C3CCDD;text-decoration:none}.navlinks a:hover{color:#FFFFFF}
+
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,214,140,.6)}70%{box-shadow:0 0 0 10px rgba(61,214,140,0)}100%{box-shadow:0 0 0 0 rgba(61,214,140,0)}}
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes marqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes bar{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes glow{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes grow{from{width:0}}
+@keyframes road{to{background-position:-80px 0}}
+@keyframes blink{50%{opacity:0}}
+.rise{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}.d5{animation-delay:.7s}.d6{animation-delay:.85s}
+.popin{animation:pop 1.1s cubic-bezier(.2,.7,.2,1) .35s both}
+.live{width:8px;height:8px;border-radius:50%;background:#3DD68C;animation:pulse 1.8s infinite;flex:none}
+.bars i{display:block;flex:1;border-radius:4px 4px 2px 2px;transform-origin:bottom;animation:bar 2.4s ease-in-out infinite}
+.floaty{animation:float 4s ease-in-out infinite}
+.glow{animation:glow 5s ease-in-out infinite}
+.grow{animation:grow 1.4s cubic-bezier(.2,.7,.2,1) .6s both}
+.roadline{height:3px;background:repeating-linear-gradient(90deg,#FFB224 0 40px,transparent 40px 80px);animation:road 1.6s linear infinite;opacity:.8}
+.caret{color:#FFB224;animation:blink 1s step-end infinite}
+
+@media (max-width:980px){
+ .split,.split.flip{grid-template-columns:1fr;gap:40px}.split.flip > :first-child{order:0}
+ .g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g5{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}
+ .h2{font-size:38px}.navlinks{display:none}.hero-h{font-size:48px !important}
+}
+@media (max-width:560px){
+ .g5 .card{min-height:0 !important}
+ .g4,.g5{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.hide-sm{display:none !important}
+ .section{padding-top:80px;padding-bottom:80px}.hero-h{font-size:40px !important}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+
+.js .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.tab[aria-selected="true"]{color:#E9EEF8;border-bottom-color:#FFB224}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div style="width: 100%; min-width: 0; background: #0A1120; overflow: hidden">
+
+<!-- NAV -->
+<header style="position: relative; z-index: 2; border-bottom: 1px solid #172238">
+ <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 16px">
+  <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #E9EEF8" aria-label="DRAXIS home">
+   <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#131E34" stroke="#22314D" stroke-width="2"></rect><path d="M19 15 H33 A17 17 0 0 1 33 49 H19 Z" fill="none" stroke="#FFB224" stroke-width="6" stroke-linejoin="round"></path><path d="M27 32 H38" stroke="#E9EEF8" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 5"></path></svg>
+   <span class="disp" style="font-size: 21px; font-stretch: 120%; letter-spacing: .05em">DRAXIS</span>
+  </a>
+  <nav class="navlinks" aria-label="Main"><a href="#product">Product</a><a href="#tour">Tour</a><a href="#teams">Who it's for</a><a href="#why">Why DRAXIS</a></nav>
+  <a class="btn pri" href="#demo" style="min-height: 44px">Book a demo</a>
+ </div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="position: relative; padding-top: 88px; padding-bottom: 110px">
+ <div class="glow" aria-hidden="true" style="position: absolute; right: -200px; top: -120px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(255,178,36,.14), transparent 62%); pointer-events: none"></div>
+ <div aria-hidden="true" style="position: absolute; inset: 0; background-image: radial-gradient(circle, #1A2742 1.2px, transparent 1.3px); background-size: 36px 36px; opacity: .6; pointer-events: none"></div>
+ <div class="wrap" style="position: relative">
+  <div class="kick rise">Operations platform for logistics recruiting &amp; HR</div>
+  <h1 class="disp rise d1 hero-h" style="font-size: 76px; line-height: 1; margin: 24px 0 26px; max-width: 980px">Know who's working, who's calling and who's <span style="color: #FFB224">hiring.</span> Right now.</h1>
+  <p class="lead rise d2">DRAXIS puts attendance, calls, leads, hires and recruiter performance in one place, across every company you run. No more chasing spreadsheets.</p>
+  <div class="rise d3" style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px">
+   <a class="btn pri" href="#demo">Book a demo</a>
+   <a class="btn" href="#tour"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M10 8l6 4-6 4z" fill="currentColor"></path></svg>Watch the 85-second tour</a>
+  </div>
+
+  <!-- live product mockup -->
+  <div class="card popin" style="margin-top: 64px; padding: 0; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,.55)">
+   <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid #22314D; gap: 12px; flex-wrap: wrap">
+    <div style="display: flex; align-items: center; gap: 12px; font-weight: 600"><span class="live"></span>Command Center <span style="color: #8D9AB5; font-weight: 400">· Today · all companies</span></div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="pill pa">Atlas</span><span class="pill pb">Keystone</span><span class="pill pg">Redline</span></div>
+   </div>
+   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0">
+    <div style="padding: 22px; display: flex; flex-direction: column; gap: 16px; min-width: 0">
+     <div class="kpis">
+      <div class="kpi"><span class="label">Calls today</span><b id="kCalls">1,284</b></div>
+      <div class="kpi"><span class="label">Checked in</span><b style="color: #3DD68C"><span id="kIn">131</span><span style="font-size: 16px; color: #8D9AB5"> / 148</span></b></div>
+      <div class="kpi"><span class="label">Leads</span><b style="color: #8FB2FF" id="kLeads">742</b></div>
+      <div class="kpi"><span class="label">Hires · week</span><b style="color: #FFB224">38</b></div>
+     </div>
+     <div class="kpi" style="padding: 14px 16px">
+      <div style="display: flex; justify-content: space-between; align-items: center"><span class="label">Calls per hour · RingCentral</span><span class="pill pg">Live</span></div>
+      <div class="bars" aria-hidden="true" style="display: flex; gap: 6px; align-items: flex-end; height: 110px; margin-top: 12px">
+       <i style="height: 40%; background: #6E9BFF; animation-delay: -.2s"></i><i style="height: 62%; background: #6E9BFF; animation-delay: -1.1s"></i><i style="height: 78%; background: #6E9BFF; animation-delay: -.6s"></i><i style="height: 90%; background: #6E9BFF; animation-delay: -1.8s"></i><i style="height: 70%; background: #6E9BFF; animation-delay: -.9s"></i><i style="height: 84%; background: #FFB224; animation-delay: -1.4s"></i><i style="height: 96%; background: #FFB224; animation-delay: -.4s"></i><i style="height: 66%; background: #6E9BFF; animation-delay: -2s"></i><i style="height: 74%; background: #6E9BFF; animation-delay: -.7s"></i><i style="height: 58%; background: #6E9BFF; animation-delay: -1.6s"></i><i style="height: 46%; background: #6E9BFF; animation-delay: -1s"></i><i style="height: 30%; background: #6E9BFF; animation-delay: -.3s"></i>
+      </div>
+     </div>
+    </div>
+    <div style="padding: 22px; border-left: 1px solid #22314D; min-width: 0">
+     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px"><span class="label">Live activity</span><span class="label" style="letter-spacing: .06em">updates every few seconds</span></div>
+     <div id="feed" aria-live="off"></div>
+    </div>
+   </div>
+   <div class="roadline" aria-hidden="true"></div>
+  </div>
+ </div>
+</section>
+
+<!-- PROBLEM -->
+<section style="padding-top: 40px; padding-bottom: 110px; border-top: 1px solid #172238">
+ <div class="wrap" style="text-align: center">
+  <div class="kick" style="justify-content: center">The problem</div>
+  <h2 class="disp h2" style="max-width: 900px; margin-left: auto; margin-right: auto">Your operation lives in six places. None of them tell you who's actually working.</h2>
+ </div>
+ <div aria-hidden="true" style="margin-top: 44px; display: flex; flex-direction: column; gap: 18px; transform: rotate(-2deg)">
+  <div style="display: flex; gap: 18px; width: max-content; animation: marq 38s linear infinite">
+   <div class="tool">Monday · Leads board<span>412 items</span></div><div class="tool">Attendance_FINAL_v3.xlsx<span>#REF!</span></div><div class="tool">RingCentral call log<span>export.csv</span></div><div class="tool">Face ID export<span>device 2</span></div><div class="tool">Recruiters group chat<span>87 unread</span></div><div class="tool">Hires — Q4 tracker<span>“4 (?)”</span></div>
+   <div class="tool">Monday · Leads board<span>412 items</span></div><div class="tool">Attendance_FINAL_v3.xlsx<span>#REF!</span></div><div class="tool">RingCentral call log<span>export.csv</span></div><div class="tool">Face ID export<span>device 2</span></div><div class="tool">Recruiters group chat<span>87 unread</span></div><div class="tool">Hires — Q4 tracker<span>“4 (?)”</span></div>
+  </div>
+  <div style="display: flex; gap: 18px; width: max-content; animation: marqR 44s linear infinite">
+   <div class="tool">“Who called the Texas lead?”<span>chat</span></div><div class="tool">Payroll hours v2<span>sheet</span></div><div class="tool">Missed calls<span>voicemail</span></div><div class="tool">Driver applications<span>Monday</span></div><div class="tool">“Numbers for today pls”<span>chat</span></div><div class="tool">Late arrivals<span>Face ID</span></div>
+   <div class="tool">“Who called the Texas lead?”<span>chat</span></div><div class="tool">Payroll hours v2<span>sheet</span></div><div class="tool">Missed calls<span>voicemail</span></div><div class="tool">Driver applications<span>Monday</span></div><div class="tool">“Numbers for today pls”<span>chat</span></div><div class="tool">Late arrivals<span>Face ID</span></div>
+  </div>
+ </div>
+ <div class="wrap" style="text-align: center; margin-top: 56px">
+  <p class="lead" style="margin: 0 auto; max-width: 640px">DRAXIS connects them and gives owners, HR heads and recruiters one login and one version of the truth.</p>
+ </div>
+</section>
+
+<!-- FEATURE 1 COMMAND CENTER -->
+<section id="product" class="section" style="background: #0C1426; border-top: 1px solid #172238">
+ <div class="wrap split reveal">
+  <div>
+   <div class="kick">Command Center</div>
+   <h2 class="disp h2">See the whole operation on one screen.</h2>
+   <p class="lead">Every employee by department and company. Who checked in today, who was late, who didn't show, and which attendance disputes need a decision.</p>
+   <ul class="bullets"><li>Live check-ins from Face ID</li><li>Open disputes at a glance</li><li>Jump into anyone's profile and numbers</li></ul>
+  </div>
+  <div class="card floaty" style="padding: 20px">
+   <div class="kpis" style="grid-template-columns: repeat(4, minmax(0, 1fr))">
+    <div class="kpi"><span class="label">Staff</span><b>148</b></div><div class="kpi"><span class="label">In</span><b style="color: #3DD68C">131</b></div><div class="kpi"><span class="label">Late</span><b style="color: #FFB224">9</b></div><div class="kpi"><span class="label">No-show</span><b style="color: #FF7A75">4</b></div>
+   </div>
+   <div style="margin-top: 14px">
+    <div class="row" style="border-top: 0"><span class="av" style="background: #FFB224">DR</span><span style="flex: 1">Dilnoza R.<span style="color: #8D9AB5"> · Recruiting · Atlas</span></span><span class="mono" style="color: #A5B1C9; font-size: 13px">07:56</span><span class="pill pg">On time</span></div>
+    <div class="row"><span class="av" style="background: #6E9BFF">KM</span><span style="flex: 1">Kevin M.<span style="color: #8D9AB5"> · Recruiting · Keystone</span></span><span class="mono" style="color: #A5B1C9; font-size: 13px">—</span><span class="pill pb">Dispute</span></div>
+    <div class="row"><span class="av" style="background: #3DD68C">SL</span><span style="flex: 1">Sarah L.<span style="color: #8D9AB5"> · Safety · Atlas</span></span><span class="mono" style="color: #A5B1C9; font-size: 13px">08:12</span><span class="pill pa">Late 12m</span></div>
+    <div class="row"><span class="av" style="background: #F2615C">JW</span><span style="flex: 1">Jamal W.<span style="color: #8D9AB5"> · Dispatch · Keystone</span></span><span class="mono" style="color: #A5B1C9; font-size: 13px">—</span><span class="pill pr">No-show</span></div>
+    <div class="row"><span class="av" style="background: #C58CFF">MG</span><span style="flex: 1">Maria G.<span style="color: #8D9AB5"> · Recruiting · Redline</span></span><span class="mono" style="color: #A5B1C9; font-size: 13px">08:04</span><span class="pill pa">Late 4m</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FEATURE 2 HR WORKSPACES (interactive tabs) -->
+<section class="section">
+ <div class="wrap split flip reveal">
+  <div>
+   <div class="kick">HR workspaces</div>
+   <h2 class="disp h2">Run HR for each company separately.</h2>
+   <p class="lead">Every company gets its own workspace: calls, talk time, leads, hires and loaded trucks, pulled live from RingCentral and Monday. Daily, weekly or monthly.</p>
+   <ul class="bullets"><li>Hiring funnel from live recruiting data</li><li>Inbound, outbound, missed and voicemail</li><li>One person's attendance next to their calls and leads</li></ul>
+  </div>
+  <div class="card" style="padding: 20px">
+   <div role="tablist" aria-label="Company" style="display: flex; gap: 4px; border-bottom: 1px solid #22314D; margin-bottom: 18px; flex-wrap: wrap">
+    <button class="tab" role="tab" data-co="0">Atlas</button><button class="tab" role="tab" data-co="1">Keystone</button><button class="tab" role="tab" data-co="2">Redline</button>
+   </div>
+   <div class="kpis">
+    <div class="kpi"><span class="label">Calls</span><b id="cCalls">3,412</b></div>
+    <div class="kpi"><span class="label">Talk time</span><b style="color: #8FB2FF" id="cTalk">186h</b></div>
+    <div class="kpi"><span class="label">Hires</span><b style="color: #3DD68C" id="cHires">38</b></div>
+    <div class="kpi"><span class="label">Trucks</span><b style="color: #FFB224" id="cTrucks">31</b></div>
+   </div>
+   <div class="kpi" style="margin-top: 14px; padding: 16px">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 14px"><span class="label">Hiring funnel · this week</span><span class="label">Monday · live</span></div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+     <div id="funnel" style="display: contents"></div>
+    </div>
+   </div>
+   <p style="margin: 12px 0 0; font-size: 13px; color: #8D9AB5">Tap a company to switch workspaces.</p>
+  </div>
+ </div>
+</section>
+
+<!-- FEATURE 3 LEAD VERIFICATION (auto demo) -->
+<section class="section" style="background: #0C1426; border-top: 1px solid #172238; border-bottom: 1px solid #172238">
+ <div class="wrap split reveal">
+  <div>
+   <div class="kick">Lead verification</div>
+   <h2 class="disp h2">Verify the number before you dial.</h2>
+   <p class="lead">One click shows whether a driver's number is on WhatsApp or Telegram, then opens the chat. Quick Facebook and Instagram search links too. Recruiters stop wasting time on dead numbers.</p>
+   <ul class="bullets"><li>Search any applicant by name, phone or email</li><li>Full Monday application history</li><li>One click to WhatsApp or Telegram</li></ul>
+  </div>
+  <div class="card" style="padding: 20px">
+   <div class="kpi" style="display: flex; align-items: center; gap: 12px; padding: 14px 16px">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8D9AB5" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+    <span class="mono" style="font-size: 16px; flex: 1; min-width: 0"><span id="vTyped"></span><span class="caret">|</span><span id="vPh" style="color: #8D9AB5">Search applicant by name, phone or email</span></span>
+   </div>
+   <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; flex-wrap: wrap">
+    <span class="av" style="background: #5ED3E6; width: 46px; height: 46px; font-size: 15px">MT</span>
+    <div style="flex: 1; min-width: 160px"><div style="font-weight: 600; font-size: 18px">Marcus Thompson</div><div class="mono" style="color: #A5B1C9; font-size: 13px; margin-top: 3px">CDL-A · 6 yrs OTR · Joliet, IL</div></div>
+    <span class="btn" id="vBtn" style="background:#FFB224;border-color:#FFB224;color:#1B1300;min-height:40px">Verify number</span>
+   </div>
+   <div style="margin-top: 14px; min-height: 220px">
+    <div id="vDone">
+     <div class="row rise"><span class="pill pg" style="min-width: 104px">WhatsApp</span><span style="flex: 1; color: #A5B1C9">Active on WhatsApp</span><span class="btn pri" style="min-height: 36px; padding: 0 14px; font-size: 14px">Open chat</span></div>
+     <div class="row rise d1"><span class="pill pa" style="min-width: 104px">Telegram</span><span style="flex: 1; color: #A5B1C9">Found · number hidden by privacy</span><span class="btn" style="min-height: 36px; padding: 0 14px; font-size: 14px">Open chat</span></div>
+     <div class="row rise d2"><span class="pill pb" style="min-width: 104px">Facebook</span><span style="flex: 1; color: #A5B1C9">Search by name and phone</span><span class="btn" style="min-height: 36px; padding: 0 14px; font-size: 14px">Search</span></div>
+     <div class="row rise d3"><span class="pill pb" style="min-width: 104px">Instagram</span><span style="flex: 1; color: #A5B1C9">Search by name</span><span class="btn" style="min-height: 36px; padding: 0 14px; font-size: 14px">Search</span></div>
+    </div>
+    <div id="vChecking" hidden>
+     <div style="display: flex; align-items: center; gap: 12px; padding: 30px 0; color: #FFB224" class="mono"><span class="live" style="background: #FFB224"></span>Checking WhatsApp and Telegram…</div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FEATURE 4 RANKING -->
+<section class="section">
+ <div class="wrap">
+  <div style="max-width: 760px">
+   <div class="kick">Recruiter ranking</div>
+   <h2 class="disp h2">Rank recruiters like an HR system, not a game.</h2>
+   <p class="lead">Scores built from activity, conversion, lead quality and knowledge. DRAXIS flags lazy days, weak leads and knowledge gaps early, and writes a 30/60/90-day plan to fix them.</p>
+  </div>
+  <div class="g5 reveal" style="margin-top: 48px" aria-label="Tiers">
+   <div class="card" style="padding: 16px; min-height: 190px"><div class="label" style="color: #C3CCDD">Provisional</div><div class="floaty" style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px"><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600"><span class="av" style="background: #FF8A4C; width: 24px; height: 24px; font-size: 10px">BT</span>Bekzod<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">52</span></div></div></div>
+   <div class="card" style="padding: 16px; min-height: 190px"><div class="label" style="color: #8FB2FF">Developing</div><div class="floaty" style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px; animation-delay: -1s"><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600; border-color: #FFB224"><span class="av" style="background: #C58CFF; width: 24px; height: 24px; font-size: 10px">AK</span>Aziz<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">64</span></div><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600"><span class="av" style="background: #5ED3E6; width: 24px; height: 24px; font-size: 10px">OP</span>Olivia<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">58</span></div></div></div>
+   <div class="card" style="padding: 16px; min-height: 190px"><div class="label" style="color: #5ED3E6">Proficient</div><div class="floaty" style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px; animation-delay: -2s"><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600"><span class="av" style="background: #F2615C; width: 24px; height: 24px; font-size: 10px">MG</span>Maria<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">71</span></div></div></div>
+   <div class="card" style="padding: 16px; min-height: 190px"><div class="label" style="color: #3DD68C">Advanced</div><div class="floaty" style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px; animation-delay: -3s"><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600"><span class="av" style="background: #6E9BFF; width: 24px; height: 24px; font-size: 10px">DR</span>Dilnoza<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">84</span></div><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600"><span class="av" style="background: #3DD68C; width: 24px; height: 24px; font-size: 10px">KM</span>Kevin<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">77</span></div></div></div>
+   <div class="card" style="padding: 16px; min-height: 190px; border-color: rgba(255,178,36,.5)"><div class="label" style="color: #FFB224">Distinguished</div><div class="floaty" style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px; animation-delay: -1.5s"><div class="kpi" style="padding: 9px 10px; display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600"><span class="av" style="background: #FFB224; width: 24px; height: 24px; font-size: 10px">SL</span>Sarah<span class="mono" style="margin-left: auto; color: #A5B1C9; font-size: 12px">91</span></div></div></div>
+  </div>
+  <div class="card" style="margin-top: 20px; padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px">
+   <div>
+    <div style="display: flex; align-items: center; gap: 12px"><span class="av" style="background: #C58CFF; width: 44px; height: 44px; font-size: 14px">AK</span><div><div style="font-weight: 600; font-size: 17px">Aziz K.</div><div style="color: #A5B1C9; font-size: 13px">Recruiter · Developing · score 64</div></div></div>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px">
+     <div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px"><span style="color: #A5B1C9">Activity</span><b class="mono">82</b></div><div class="meter"><i class="grow" style="width: 82%; background: #3DD68C"></i></div></div>
+     <div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px"><span style="color: #A5B1C9">Conversion</span><b class="mono">58</b></div><div class="meter"><i class="grow" style="width: 58%; background: #FFB224"></i></div></div>
+     <div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px"><span style="color: #A5B1C9">Quality</span><b class="mono">66</b></div><div class="meter"><i class="grow" style="width: 66%; background: #6E9BFF"></i></div></div>
+     <div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px"><span style="color: #A5B1C9">Knowledge</span><b class="mono">49</b></div><div class="meter"><i class="grow" style="width: 49%; background: #F2615C"></i></div></div>
+    </div>
+   </div>
+   <div style="display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center"><span class="label">Flags</span><span class="pill pr">Knowledge gap</span><span class="pill pa">Lead quality</span></div>
+    <div class="label">Improvement plan · generated automatically</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+     <div class="kpi"><div class="disp" style="color: #FFB224; font-size: 22px">30 days</div><p style="margin: 6px 0 0; font-size: 14px; line-height: 1.4">Shadow a Distinguished recruiter on 5 calls</p></div>
+     <div class="kpi"><div class="disp" style="color: #FFB224; font-size: 22px">60 days</div><p style="margin: 6px 0 0; font-size: 14px; line-height: 1.4">Pass the pay and route knowledge check</p></div>
+     <div class="kpi"><div class="disp" style="color: #FFB224; font-size: 22px">90 days</div><p style="margin: 6px 0 0; font-size: 14px; line-height: 1.4">Lift lead-to-hire from 3% to 6%</p></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FEATURE 5 ATTENDANCE & ACCESS -->
+<section class="section" style="background: #0C1426; border-top: 1px solid #172238">
+ <div class="wrap split flip reveal">
+  <div>
+   <div class="kick">Attendance &amp; access</div>
+   <h2 class="disp h2">Attendance that matches real shifts.</h2>
+   <p class="lead">Face ID punches sync on their own. Overnight shifts stay on the right day. Fix a punch, approve a request, and give a CEO or HR head read-only guest access without handing over the keys.</p>
+   <ul class="bullets"><li>Today, week, month or a custom range</li><li>Approve or reject corrections</li><li>Client Portal logins so employees see their own side</li></ul>
+  </div>
+  <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 14px">
+   <div class="kpi" style="padding: 16px">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 12px"><span class="label">Face ID punches · this week</span><span class="label">Mon – Fri</span></div>
+    <div style="display: grid; grid-template-columns: 90px repeat(5, minmax(0, 1fr)); gap: 8px 6px; align-items: center; font-size: 13px">
+     <span></span><span class="label">Mon</span><span class="label">Tue</span><span class="label">Wed</span><span class="label">Thu</span><span class="label">Fri</span>
+     <span>Sarah L.</span><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i>
+     <span>Kevin M.</span><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><span class="pill pb" style="font-size: 11px; padding: 2px 8px">dispute</span><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #3DD68C"></i>
+     <span>Jamal W.</span><i class="grow" style="height: 14px; border-radius: 4px; background: #6E9BFF; margin-left: 60%"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #6E9BFF; margin-left: 60%"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #6E9BFF; margin-left: 60%"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #6E9BFF; margin-left: 60%"></i><i class="grow" style="height: 14px; border-radius: 4px; background: #6E9BFF; margin-left: 60%"></i>
+    </div>
+    <p class="mono" style="margin: 12px 0 0; font-size: 12px; color: #8FB2FF">Night shift 22:00 → 06:00 · stays on the day it started</p>
+   </div>
+   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+    <div class="kpi" style="padding: 16px">
+     <span class="label">Correction request</span>
+     <div style="margin: 10px 0; font-size: 14px"><b>Sarah L.</b> · Tue check-in</div>
+     <div class="mono" style="font-size: 15px"><s style="color: #FF7A75">08:12</s> → <span style="color: #3DD68C">07:55</span></div>
+     <div style="display: flex; gap: 8px; margin-top: 12px"><span class="pill pg">Approved</span></div>
+    </div>
+    <div class="kpi" style="padding: 16px">
+     <span class="label">Access</span>
+     <div class="row" style="border-top: 0; padding: 8px 0"><span style="flex: 1">Owner</span><span class="pill pg">Full</span></div>
+     <div class="row" style="padding: 8px 0"><span style="flex: 1">Head of HR</span><span class="pill pb">Read-only</span></div>
+     <div class="row" style="padding: 8px 0"><span style="flex: 1">Recruiters</span><span class="pill pa">Own data</span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- VIDEO TOUR -->
+<section id="tour" class="section">
+ <div class="wrap">
+  <div style="text-align: center; max-width: 760px; margin: 0 auto">
+   <div class="kick" style="justify-content: center">Product tour</div>
+   <h2 class="disp h2">See DRAXIS in 85 seconds.</h2>
+  </div>
+  <div class="card" style="margin-top: 36px; padding: 10px; box-shadow: 0 40px 120px rgba(0,0,0,.5)">
+   <video src="tour.mp4" poster="poster.jpg" controls playsinline preload="metadata" aria-label="DRAXIS product tour video" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 10px; background: #0A1120"></video>
+  </div>
+ </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="teams" class="section" style="background: #0C1426; border-top: 1px solid #172238">
+ <div class="wrap">
+  <div class="kick">Who it's for</div>
+  <h2 class="disp h2" style="max-width: 760px">One platform. The right view for every role.</h2>
+  <div class="g5 reveal" style="margin-top: 40px">
+   <div class="card" style="padding: 22px"><div class="disp" style="font-size: 20px">Owners &amp; CEOs</div><p style="color: #A5B1C9; font-size: 15px; line-height: 1.5; margin: 10px 0 0">Live view of companies, hiring, attendance and team output.</p></div>
+   <div class="card" style="padding: 22px"><div class="disp" style="font-size: 20px">HR &amp; recruiting heads</div><p style="color: #A5B1C9; font-size: 15px; line-height: 1.5; margin: 10px 0 0">Lead pipelines, recruiter performance, driver database, coaching.</p></div>
+   <div class="card" style="padding: 22px"><div class="disp" style="font-size: 20px">Ops &amp; admins</div><p style="color: #A5B1C9; font-size: 15px; line-height: 1.5; margin: 10px 0 0">Staff directory, access control, attendance fixes, portal logins.</p></div>
+   <div class="card" style="padding: 22px"><div class="disp" style="font-size: 20px">Recruiters</div><p style="color: #A5B1C9; font-size: 15px; line-height: 1.5; margin: 10px 0 0">Their calls, leads and hires, and how they compare to the team.</p></div>
+   <div class="card" style="padding: 22px"><div class="disp" style="font-size: 20px">Guests</div><p style="color: #A5B1C9; font-size: 15px; line-height: 1.5; margin: 10px 0 0">Scoped, read-only access. No full admin rights.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- WHY -->
+<section id="why" class="section">
+ <div class="wrap">
+  <div class="kick">Why teams switch</div>
+  <div class="g4 reveal" style="margin-top: 40px">
+   <div style="border-top: 2px solid #FFB224; padding-top: 22px"><div class="disp" style="font-size: 36px; color: #FFB224">One login</div><p style="font-size: 17px; line-height: 1.5; color: #D5DCEA; margin: 12px 0 0">Instead of Monday, RingCentral, Sheets, Face ID exports and chat apps.</p></div>
+   <div style="border-top: 2px solid #FFB224; padding-top: 22px"><div class="disp" style="font-size: 36px; color: #FFB224">The truth</div><p style="font-size: 17px; line-height: 1.5; color: #D5DCEA; margin: 12px 0 0">Managers see attendance, calls and hires side by side. Not stories.</p></div>
+   <div style="border-top: 2px solid #FFB224; padding-top: 22px"><div class="disp" style="font-size: 36px; color: #FFB224">Hours back</div><p style="font-size: 17px; line-height: 1.5; color: #D5DCEA; margin: 12px 0 0">Recruiters verify a number, open the chat and see the history in one place.</p></div>
+   <div style="border-top: 2px solid #FFB224; padding-top: 22px"><div class="disp" style="font-size: 36px; color: #FFB224">Every company</div><p style="font-size: 17px; line-height: 1.5; color: #D5DCEA; margin: 12px 0 0">Owners control the whole group without living in the weeds.</p></div>
+  </div>
+
+  <div style="margin-top: 110px">
+   <div class="kick">The full stack</div>
+   <h2 class="disp h2" style="max-width: 760px">Built for the logistics recruiting world.</h2>
+   <div class="g4 reveal" style="margin-top: 36px">
+    <div class="card" style="padding: 22px"><span class="pill pa">Call Monitor</span><p style="color: #D5DCEA; font-size: 15px; line-height: 1.5; margin: 14px 0 0">Live call boards: completed, missed, voicemail. Ends fake reporting.</p></div>
+    <div class="card" style="padding: 22px"><span class="pill pb">Lead Analytics</span><p style="color: #D5DCEA; font-size: 15px; line-height: 1.5; margin: 14px 0 0">Candidate pipelines and recruiter performance by day, week and month.</p></div>
+    <div class="card" style="padding: 22px"><span class="pill pg">Recruiter Trainer</span><p style="color: #D5DCEA; font-size: 15px; line-height: 1.5; margin: 14px 0 0">Recruiters rehearse with AI truck-driver personas before real calls.</p></div>
+    <div class="card" style="padding: 22px"><span class="pill pr">Driver Scoring</span><p style="color: #D5DCEA; font-size: 15px; line-height: 1.5; margin: 14px 0 0">Applicant fit from CDL, MVR, clearinghouse and history.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- CTA / DEMO FORM -->
+<section id="demo" class="section" style="position: relative; background: #0C1426; border-top: 1px solid #172238">
+ <div class="glow" aria-hidden="true" style="position: absolute; left: 50%; top: 40px; width: 900px; height: 700px; margin-left: -450px; border-radius: 50%; background: radial-gradient(circle, rgba(255,178,36,.12), transparent 62%); pointer-events: none"></div>
+ <div class="wrap split" style="position: relative">
+  <div>
+   <h2 class="disp" style="font-size: 60px; line-height: 1.02; margin: 0">Hire faster. Coach better. <span style="color: #FFB224">Stop losing hours to chaos.</span></h2>
+   <p class="lead" style="margin-top: 22px">Tell us about your team. We'll show you DRAXIS on your own workflow and set it up for your companies.</p>
+   <p class="mono" id="mailLine" style="margin-top: 26px; font-size: 15px; color: #C3CCDD">Or write directly: <a id="mailLink" href="#">[YOUR EMAIL]</a></p>
+  </div>
+  <form id="demoForm" class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 16px" aria-label="Book a demo">
+   <div class="field"><label for="d-name">Your name</label><input id="d-name" type="text" autocomplete="name" placeholder="Jane Carter"></div>
+   <div class="field"><label for="d-company">Company</label><input id="d-company" type="text" autocomplete="organization" placeholder="Your trucking company"></div>
+   <div class="field"><label for="d-email">Work email</label><input id="d-email" type="email" autocomplete="email" placeholder="jane@company.com"></div>
+   <div class="field"><label for="d-size">Recruiting and HR team size</label><select id="d-size"><option>1–10 people</option><option>11–30 people</option><option>31–100 people</option><option>100+ people</option></select></div>
+   <button type="submit" class="btn pri" style="margin-top: 6px; width: 100%">Book a demo</button>
+   <p id="formNote" role="status" style="margin: 0; font-size: 14px; color: #A5B1C9; min-height: 20px"></p>
+  </form>
+ </div>
+</section>
+
+<footer style="border-top: 1px solid #172238">
+ <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 30px; padding-bottom: 30px">
+  <div style="display: flex; align-items: center; gap: 10px"><svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#131E34" stroke="#22314D" stroke-width="2"></rect><path d="M19 15 H33 A17 17 0 0 1 33 49 H19 Z" fill="none" stroke="#FFB224" stroke-width="6" stroke-linejoin="round"></path></svg><span class="disp" style="font-size: 16px; letter-spacing: .05em">DRAXIS</span></div>
+  <span style="color: #8D9AB5; font-size: 14px">Operations platform for logistics recruiting &amp; HR</span>
+ </div>
+</footer>
+
+</div>
+<script src="/app.js" defer></script>
+</body>
+</html>
